@@ -55,3 +55,22 @@ resource "azurerm_windows_web_app" "win_web_app" {
     owner       = "Travis"
   }
 }
+
+// This Resource block will create a storage account
+// A storage account is needed for storing information like: logs, user-uploaded files or static assests
+resource "azurerm_storage_account" "storage_account" {
+  name = "asastoragetravissandbox"
+  resource_group_name = azurerm_resource_group.resource_group.name
+  location = azurerm_resource_group.resource_group.location
+  account_tier = "Standard"
+  account_replication_type = "GRS"
+  
+  account_kind = "StorageV2"
+  access_tier = "Cool"
+
+
+  tags = {
+    environment = "sandbox"
+    owner = "Travis"
+  }
+}
