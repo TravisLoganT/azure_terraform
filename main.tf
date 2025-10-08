@@ -18,7 +18,7 @@ resource "azurerm_service_plan" "service_plan" {
   resource_group_name = var.resource_group_name
   location            = var.location
   os_type             = var.app_service_plan_os_type // Specifies the OS for the web app (Windows or Linux)
-  sku_name            = var.app_service_plan_sku      // Pricing tier (B1 is a basic tier)
+  sku_name            = var.app_service_plan_sku     // Pricing tier (B1 is a basic tier)
 
   tags = {
     environment = var.environemt
@@ -87,13 +87,4 @@ resource "azurerm_application_insights" "application_insights" {
     environment = var.environemt
     owner       = var.owner
   }
-}
-
-output "instrumentation_key" {
-  value     = azurerm_application_insights.application_insights.instrumentation_key
-  sensitive = true
-}
-
-output "app_id" {
-  value = azurerm_application_insights.application_insights.app_id
 }
