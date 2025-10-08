@@ -74,3 +74,25 @@ resource "azurerm_storage_account" "storage_account" {
     owner = "Travis"
   }
 }
+
+// This Resource block will be for Application Insights
+// Application insights can be used for monitoring performance and/or errors in other resources (in this case the web app resource)
+resource "azurerm_application_insights" "application_insights" {
+  name = "appinsights-travis-sandbox"
+  location = azurerm_resource_group.resource_group.location
+  resource_group_name = azurerm_resource_group.resource_group.name
+  application_type = "web"  
+
+  tags = {
+    environment = "sandbox"
+    owner = "Travis"
+  }
+}
+
+output "instrumentation_key" {
+  value = azurerm_application_insights.application_insights.instrumentation_key
+}
+
+output "app_id" {
+  value = azurerm_application_insights.application_insights.app_id
+}
